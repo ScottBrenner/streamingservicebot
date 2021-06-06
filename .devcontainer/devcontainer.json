@@ -16,8 +16,7 @@
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"go.toolsManagement.checkForUpdates": "local",
 		"go.gopath": "/go",
-		"go.useLanguageServer": true,
-		"git.enableCommitSigning": true
+		"go.useLanguageServer": true
 	},
 	
 	// Add the IDs of extensions you want installed when the container is created.
