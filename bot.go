@@ -17,9 +17,11 @@ type streamingServiceBot struct {
 func (r *streamingServiceBot) Post(p *reddit.Post) error {
 	if strings.Contains(p.URL, "youtu") {
 		fmt.Printf("%s posted \"%s\"!", p.Author, p.Title)
+		youtubeSearchResult := youtubeSearch(p.Title)
+		youtubeSearchResultText := fmt.Sprintf("I found this track on other streaming services! %s", youtubeSearchResult)
 		return r.bot.Reply(
 			p.Name,
-			"I found this track on other streaming services!",
+			youtubeSearchResultText,
 		)
 	}
 	return nil
@@ -40,7 +42,7 @@ func main() {
 	if bot, err := reddit.NewBot(cfg); err != nil {
 		fmt.Println("Failed to create bot handle: ", err)
 	} else {
-		cfg := graw.Config{Subreddits: []string{"hqtrackbot+streamingservicebot"}}
+		cfg := graw.Config{Subreddits: []string{"streamingservicebot"}}
 		handler := &streamingServiceBot{bot: bot}
 		if _, wait, err := graw.Run(handler, bot, cfg); err != nil {
 			fmt.Println("Failed to start graw run: ", err)
