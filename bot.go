@@ -4,38 +4,20 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"regexp"
 
 	"github.com/turnage/graw"
 	"github.com/turnage/graw/reddit"
 )
-
-const replyHeader string = "I found this track on other streaming services!:\n\n"
-const replyFooter string = `
-
-----
-
-^(I am a bot, and this action was performed automatically.) [^(Source)](https://github.com/ScottBrenner/streamingservicebot)`
 
 type streamingServiceBot struct {
 	bot reddit.Bot
 }
 
 func (r *streamingServiceBot) Post(p *reddit.Post) error {
-	var re = regexp.MustCompile(`youtu|youtube|soundcloud|spotify`)
-	if re.MatchString(p.URL) {
-		replyText := replyHeader
-		streamingServices := make(map[string]string)
-		fmt.Printf("%s posted \"%s\"!", p.Author, p.Title)
-		youtubeSearchResult := youtubeSearch(p.Title)
-		streamingServices["YouTube"] = fmt.Sprintf("- [YouTube](%s)\n", youtubeSearchResult)
-		for _, result := range streamingServices {
-			replyText += result
-		}
-		replyText += replyFooter
+	if checkURL(p) {
 		return r.bot.Reply(
 			p.Name,
-			replyText,
+			generateReply(p),
 		)
 	}
 	return nil
