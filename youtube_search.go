@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -16,8 +15,6 @@ const maxResults = 5
 const urlPrefix = "https://youtu.be/%s"
 
 func youtubeSearch(postTitle string) string {
-	flag.Parse()
-
 	client := &http.Client{
 		Transport: &transport.APIKey{Key: os.Getenv("SSB_YOUTUBE_KEY")},
 	}
