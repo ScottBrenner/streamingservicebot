@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/turnage/graw/reddit"
@@ -24,19 +25,16 @@ func Test_checkURL(t *testing.T) {
 }
 
 func Test_processYouTube(t *testing.T) {
-	type args struct {
-		p *reddit.Post
-	}
 	tests := []struct {
 		name string
-		args args
+		args *reddit.Post
 		want string
 	}{
-		// TODO: Add test cases.
+		{"youtu.be", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [YouTube](%s)\n", "https://youtu.be/aDlZckOUHiw")},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := processYouTube(tt.args.p); got != tt.want {
+			if got := processYouTube(tt.args); got != tt.want {
 				t.Errorf("processYouTube() = %v, want %v", got, tt.want)
 			}
 		})
