@@ -22,13 +22,11 @@ func spotifySearch(postTitle string) string {
 	}
 
 	client := spotify.Authenticator{}.NewClient(token)
-	// search for playlists and albums containing "holiday"
 	results, err := client.Search(postTitle, spotify.SearchTypeTrack)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// handle playlist results
 	if results.Tracks != nil {
 		return results.Tracks.Tracks[0].ExternalURLs["spotify"]
 	}
