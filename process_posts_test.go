@@ -33,7 +33,7 @@ func Test_processStreamingService(t *testing.T) {
 		want    string
 	}{
 		{"youtu.be", "YouTube", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [YouTube](%s)\n", "https://youtu.be/aDlZckOUHiw")},
-		{"open.spotify.com", "Spotify", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [Spotify](%s)\n", "https://open.spotify.com/track/3wUJy53OxHYqvWT0UbPCIu")},
+		{"open.spotify.com", "Spotify", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [Spotify](%s)\n", "https://open.spotify.com/track/4ztZkG2moGQkL2aFEXB7IQ")},
 		{"None", "None", &reddit.Post{Title: "John Askew - Chime"}, ""},
 	}
 	for _, tt := range tests {
