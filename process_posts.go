@@ -24,6 +24,9 @@ func processStreamingService(service string, p *reddit.Post) string {
 	case "YouTube":
 		youtubeSearchResult := youtubeSearch(p.Title)
 		return fmt.Sprintf("- [YouTube](%s)\n", youtubeSearchResult)
+	case "Spotify":
+		spotifySearchResult := spotifySearch(p.Title)
+		return fmt.Sprintf("- [Spotify](%s)\n", spotifySearchResult)
 	}
 	return ""
 }
@@ -33,6 +36,7 @@ func generateReply(p *reddit.Post) string {
 	streamingServices := make(map[string]string)
 	replyText = replyHeader
 	streamingServices["YouTube"] = processStreamingService("YouTube", p)
+	streamingServices["Spotify"] = processStreamingService("Spotify", p)
 	for _, result := range streamingServices {
 		if result != "" {
 			replyText += result
