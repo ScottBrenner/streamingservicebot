@@ -15,6 +15,7 @@ func Test_checkURL(t *testing.T) {
 	}{
 		{"youtube.com", &reddit.Post{URL: "https://www.youtube.com/watch?v=aDlZckOUHiw"}, true},
 		{"reddit.com", &reddit.Post{URL: "https://www.reddit.com/user/streamingservicebot"}, false},
+		{"open.spotify.com", &reddit.Post{URL: "https://open.spotify.com/track/4ztZkG2moGQkL2aFEXB7IQ"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
