@@ -19,18 +19,24 @@ func checkURL(p *reddit.Post) bool {
 	return re.MatchString(p.URL)
 }
 
-func processYouTube(p *reddit.Post) string {
-	youtubeSearchResult := youtubeSearch(p.Title)
-	return fmt.Sprintf("- [YouTube](%s)\n", youtubeSearchResult)
+func processStreamingService(service string, p *reddit.Post) string {
+	switch service {
+	case "YouTube":
+		youtubeSearchResult := youtubeSearch(p.Title)
+		return fmt.Sprintf("- [YouTube](%s)\n", youtubeSearchResult)
+	}
+	return ""
 }
 
 func generateReply(p *reddit.Post) string {
 	var replyText string
 	streamingServices := make(map[string]string)
 	replyText = replyHeader
-	streamingServices["YouTube"] = processYouTube(p)
+	streamingServices["YouTube"] = processStreamingService("YouTube", p)
 	for _, result := range streamingServices {
-		replyText += result
+		if result != "" {
+			replyText += result
+		}
 	}
 	replyText += replyFooter
 	return replyText

@@ -25,18 +25,19 @@ func Test_checkURL(t *testing.T) {
 	}
 }
 
-func Test_processYouTube(t *testing.T) {
+func Test_processStreamingService(t *testing.T) {
 	tests := []struct {
-		name string
-		args *reddit.Post
-		want string
+		name    string
+		service string
+		args    *reddit.Post
+		want    string
 	}{
-		{"youtu.be", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [YouTube](%s)\n", "https://youtu.be/aDlZckOUHiw")},
+		{"youtu.be", "YouTube", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [YouTube](%s)\n", "https://youtu.be/aDlZckOUHiw")},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := processYouTube(tt.args); got != tt.want {
-				t.Errorf("processYouTube() = %v, want %v", got, tt.want)
+			if got := processStreamingService(tt.service, tt.args); got != tt.want {
+				t.Errorf("processStreamingService() = %v, want %v", got, tt.want)
 			}
 		})
 	}
