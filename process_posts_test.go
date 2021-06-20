@@ -15,7 +15,7 @@ func Test_checkURL(t *testing.T) {
 	}{
 		{"youtube.com", &reddit.Post{URL: "https://www.youtube.com/watch?v=aDlZckOUHiw"}, true},
 		{"reddit.com", &reddit.Post{URL: "https://www.reddit.com/user/streamingservicebot"}, false},
-		{"open.spotify.com", &reddit.Post{URL: "https://open.spotify.com/track/4ztZkG2moGQkL2aFEXB7IQ"}, true},
+		{"open.spotify.com", &reddit.Post{URL: "https://open.spotify.com/track/6xWwbqSsos0LFDVrx134HC"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -34,7 +34,7 @@ func Test_processStreamingService(t *testing.T) {
 		want    string
 	}{
 		{"youtu.be", "YouTube", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [YouTube](%s)\n", "https://youtu.be/aDlZckOUHiw")},
-		{"open.spotify.com", "Spotify", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [Spotify](%s)\n", "https://open.spotify.com/track/4ztZkG2moGQkL2aFEXB7IQ")},
+		{"open.spotify.com", "Spotify", &reddit.Post{Title: "John Askew - Chime"}, fmt.Sprintf("- [Spotify](%s)\n", "https://open.spotify.com/track/6xWwbqSsos0LFDVrx134HC")},
 		{"None", "None", &reddit.Post{Title: "John Askew - Chime"}, ""},
 	}
 	for _, tt := range tests {
@@ -47,19 +47,24 @@ func Test_processStreamingService(t *testing.T) {
 }
 
 func Test_generateReply(t *testing.T) {
-	type args struct {
-		p *reddit.Post
-	}
 	tests := []struct {
 		name string
-		args args
+		args *reddit.Post
 		want string
 	}{
-		// TODO: Add test cases.
+		{"All", &reddit.Post{Title: "John Askew - Chime"}, `I found this track on other streaming services!:
+
+- [YouTube](https://youtu.be/aDlZckOUHiw)
+- [Spotify](https://open.spotify.com/track/6xWwbqSsos0LFDVrx134HC)
+
+
+----
+
+^(I am a bot, and this action was performed automatically.) [^(Source)](https://github.com/ScottBrenner/streamingservicebot)`},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := generateReply(tt.args.p); got != tt.want {
+			if got := generateReply(tt.args); got != tt.want {
 				t.Errorf("generateReply() = %v, want %v", got, tt.want)
 			}
 		})
