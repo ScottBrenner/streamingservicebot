@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"strings"
 
 	"github.com/turnage/graw/reddit"
 )
@@ -38,7 +39,7 @@ func generateReply(p *reddit.Post) string {
 	streamingServices["YouTube"] = processStreamingService("YouTube", p)
 	streamingServices["Spotify"] = processStreamingService("Spotify", p)
 	for _, result := range streamingServices {
-		if result != "" {
+		if strings.Contains(result, "https://") {
 			replyText += result
 		}
 	}
