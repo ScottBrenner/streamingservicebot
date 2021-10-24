@@ -1,0 +1,33 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: go test -v ./...
+      env:
+        SSB_REDDIT_USERNAME: "streamingservicebot"
+        SSB_SPOTIFY_CLIENT_SECRET: ${{ secrets.SSB_SPOTIFY_CLIENT_SECRET }}
+        SSB_YOUTUBE_KEY: ${{ secrets.SSB_YOUTUBE_KEY }}
+        SSB_REDDIT_SECRET: ${{ secrets.SSB_REDDIT_SECRET }}
+        SSB_SPOTIFY_CLIENT_ID: ${{ secrets.SSB_SPOTIFY_CLIENT_ID }}
+        SSB_REDDIT_PASSWORD: ${{ secrets.SSB_REDDIT_PASSWORD }}
+        SSB_REDDIT_ID: ${{ secrets.SSB_REDDIT_ID }}

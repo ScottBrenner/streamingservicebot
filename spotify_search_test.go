@@ -8,7 +8,7 @@ func Test_spotifySearch(t *testing.T) {
 		args string
 		want string
 	}{
-		{"John Askew - Chime", "John Askew - Chime", "https://open.spotify.com/track/6xWwbqSsos0LFDVrx134HC"},
+		{"John Askew - Chime", "John Askew - Chime", "https://open.spotify.com/track/4JXmVLQ6cYfakyjRvIAWDW"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
