@@ -23,7 +23,6 @@ func spotifySearch(postTitle string) string {
 		log.Fatalf("couldn't get token: %v", err)
 	}
 
-	// client := spotify.Authenticator{}.NewClient(token)
 	httpClient := spotifyauth.New().Client(ctx, token)
 	client := spotify.New(httpClient)
 	results, err := client.Search(ctx, postTitle, spotify.SearchTypeTrack)
