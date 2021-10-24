@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/turnage/graw"
 	"github.com/turnage/graw/reddit"
@@ -38,7 +39,7 @@ func main() {
 	if bot, err := reddit.NewBot(cfg); err != nil {
 		fmt.Println("Failed to create bot handle: ", err)
 	} else {
-		cfg := graw.Config{Subreddits: []string{"streamingservicebot"}}
+		cfg := graw.Config{Subreddits: strings.Split(os.Getenv("SSB_REDDIT_SUBREDDITS"), "+")}
 		handler := &streamingServiceBot{bot: bot}
 		if _, wait, err := graw.Run(handler, bot, cfg); err != nil {
 			fmt.Println("Failed to start graw run: ", err)
