@@ -4,7 +4,7 @@
 FROM golang:1.17-buster as builder
 
 # https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys
-LABEL org.opencontainers.image.source = &quot;https://github.com/ScottBrenner/streamingservicebot&quot;
+LABEL org.opencontainers.image.source = "https://github.com/ScottBrenner/streamingservicebot"
 
 # Create and change to the app directory.
 WORKDIR /app
