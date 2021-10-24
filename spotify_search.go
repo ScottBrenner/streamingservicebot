@@ -7,22 +7,26 @@ import (
 
 	"golang.org/x/oauth2/clientcredentials"
 
-	"github.com/zmb3/spotify"
+	"github.com/zmb3/spotify/v2"
+	spotifyauth "github.com/zmb3/spotify/v2/auth"
 )
 
 func spotifySearch(postTitle string) string {
+	ctx := context.Background()
 	config := &clientcredentials.Config{
 		ClientID:     os.Getenv("SSB_SPOTIFY_CLIENT_ID"),
 		ClientSecret: os.Getenv("SSB_SPOTIFY_CLIENT_SECRET"),
-		TokenURL:     spotify.TokenURL,
+		TokenURL:     spotifyauth.TokenURL,
 	}
 	token, err := config.Token(context.Background())
 	if err != nil {
 		log.Fatalf("couldn't get token: %v", err)
 	}
 
-	client := spotify.Authenticator{}.NewClient(token)
-	results, err := client.Search(postTitle, spotify.SearchTypeTrack)
+	// client := spotify.Authenticator{}.NewClient(token)
+	httpClient := spotifyauth.New().Client(ctx, token)
+	client := spotify.New(httpClient)
+	results, err := client.Search(ctx, postTitle, spotify.SearchTypeTrack)
 	if err != nil {
 		log.Fatal(err)
 	}
