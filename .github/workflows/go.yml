@@ -23,3 +23,11 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+      env:
+        SSB_REDDIT_USERNAME: ${{ secrets.SSB_REDDIT_USERNAME }}
+        SSB_SPOTIFY_CLIENT_SECRET: ${{ secrets.SSB_SPOTIFY_CLIENT_SECRET }}
+        SSB_YOUTUBE_KEY: ${{ secrets.SSB_YOUTUBE_KEY }}
+        SSB_REDDIT_SECRET: ${{ secrets.SSB_REDDIT_SECRET }}
+        SSB_SPOTIFY_CLIENT_ID: ${{ secrets.SSB_SPOTIFY_CLIENT_ID }}
+        SSB_REDDIT_PASSWORD: ${{ secrets.SSB_REDDIT_PASSWORD }}
+        SSB_REDDIT_ID: ${{ secrets.SSB_REDDIT_ID }}
