@@ -64,4 +64,4 @@ jobs:
       - name: Deploy to Amazon ECS task definition
         run: |
           pip install boto3
-          aws --region us-west-1 ecs update-service --cluster streamingservicebot-cluster --service streamingservicebot-service --task-definition  StreamingservicebotInfraStackStreamingServiceBotTaskDef9C5FBEE0 --force-new-deployment
+          aws --region us-west-1 ecs update-service --cluster streamingservicebot-cluster --service streamingservicebot-service --task-definition StreamingservicebotInfraStackStreamingServiceBotTaskDef9C5FBEE0 --force-new-deployment
