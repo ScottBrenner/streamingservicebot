@@ -6,8 +6,6 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '38 18 * * 3'
   push:
     branches: [ main ]
     # Publish semver tags as releases.
@@ -61,3 +59,10 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      
+      # Deploy a new task definition to Amazon ECS
+      - name: Deploy to Amazon ECS task definition
+        run: |
+          pip install boto3
+          aws --region us-west-1 ecs update-service --cluster streamingservicebot-cluster --service streamingservicebot-service --task-definition  StreamingservicebotInfraStackStreamingServiceBotTaskDef9C5FBEE0 --force-new-deployment
