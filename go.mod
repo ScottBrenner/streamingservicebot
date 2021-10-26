@@ -1,6 +1,6 @@
 module github.com/ScottBrenner/streamingservicebot
 
-go 1.16
+go 1.17
 
 require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
@@ -14,4 +14,14 @@ require (
 	google.golang.org/api v0.59.0
 	google.golang.org/genproto v0.0.0-20211021150943-2b146023228c // indirect
 	google.golang.org/grpc v1.41.0 // indirect
+)
+
+require (
+	cloud.google.com/go v0.97.0 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/googleapis/gax-go/v2 v2.1.1 // indirect
+	github.com/turnage/redditproto v0.0.0-20151223012412-afedf1b6eddb // indirect
+	go.opencensus.io v0.23.0 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/protobuf v1.27.1 // indirect
 )

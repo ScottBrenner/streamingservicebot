@@ -11,7 +11,7 @@ import (
 	"google.golang.org/api/youtube/v3"
 )
 
-const maxResults = 5
+const maxResults = 3
 const urlPrefix = "https://youtu.be/%s"
 
 func youtubeSearch(postTitle string) string {
