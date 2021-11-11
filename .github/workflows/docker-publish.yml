@@ -73,4 +73,4 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           pip install boto3
-          aws --region us-west-1 ecs update-service --cluster streamingservicebot-cluster --service streamingservicebot-service --task-definition StreamingservicebotInfraStackStreamingServiceBotTaskDef9C5FBEE0 --force-new-deployment
+          aws --region us-west-1 ecs update-service --cluster streamingservicebot-cluster --service streamingservicebot-service --task-definition streamingservicebot-task --force-new-deployment
